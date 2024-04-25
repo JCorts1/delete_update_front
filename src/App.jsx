@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from "axios"
 import { useState } from 'react'
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+import Delete from './components/Delete'
 
 const App = () => {
   const [kid, setKid] = useState([]);
@@ -21,12 +22,16 @@ const App = () => {
       console.log(response);
     })
   }
+
+  const handleDelete = (id) => {
+    console.log(id, "has been deleted");
+  }
   return (
     <div className='w-screen h-screen bg-slate-600'>
       <div className='w-screen flex h-2/4'>
         <div className='w-2/4 h-full'>
           {kid.map((kid)=>
-        <div>
+        <div key={kid.id}>
           <div>
           <h2>Name:</h2>
           <h3>{kid.name}</h3>
@@ -35,6 +40,7 @@ const App = () => {
             <h2>Grade:</h2>
             <h3>{kid.grade}</h3>
           </div>
+          <Delete id={kid.id} onDelete={handleDelete} />
         </div>
        )}
         </div>
@@ -44,6 +50,7 @@ const App = () => {
         <div className='w-2/4 h-full'></div>
         <div className='w-2/4 h-full'></div>
       </div>
+      
     </div>
   )
 }
